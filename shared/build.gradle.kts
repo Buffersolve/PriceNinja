@@ -16,12 +16,31 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
+//    listOf(
+//        iosX64(),
+//        iosArm64(),
+//        iosSimulatorArm64()
+//    ).forEach { iosTarget ->
+//        iosTarget.binaries.framework {
+//            baseName = "shared"
+//            isStatic = true
+//        }
+//    }
     
     jvm()
     
     sourceSets {
         commonMain.dependencies {
+
             // put your Multiplatform dependencies here
+//            val voyagerVersion = "1.0.0"
+
+        }
+        androidMain.dependencies {
+            // put your Android dependencies here
+        }
+        iosMain.dependencies {
+            // put your iOS dependencies here
         }
     }
 }
