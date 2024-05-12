@@ -13,13 +13,13 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.koin.java.KoinJavaComponent.inject
-import ua.priceninja.data.db.ItemDAO
-import ua.priceninja.data.db.ItemsTable
+import db.ItemDAO
+import db.ItemsTable
 import ua.priceninja.data.network.GetSilpoData
 import ua.priceninja.data.parser.GetAtbData
-import ua.priceninja.di.startKoinApp
-import ua.priceninja.domain.model.Item
-import ua.priceninja.utils.Shop
+import di.startKoinApp
+import domain.model.Item
+import utils.Shop
 
 fun main() {
     embeddedServer(Netty, port = SERVER_PORT, host = "0.0.0.0", module = Application::module)

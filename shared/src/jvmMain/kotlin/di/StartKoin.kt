@@ -1,8 +1,8 @@
-package ua.priceninja.di
+package di
 
 import org.koin.core.context.GlobalContext.startKoin
 
-fun startKoinApp() {
+actual fun startKoinApp() {
     startKoin {
         modules(networkModule, databaseModule, daoModule)
     }

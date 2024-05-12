@@ -5,10 +5,10 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jsoup.Jsoup
 import org.koin.java.KoinJavaComponent.inject
-import ua.priceninja.data.db.ItemsTable
-import ua.priceninja.data.network.client.NetworkService
-import ua.priceninja.utils.Links
-import ua.priceninja.utils.Shop
+import db.ItemsTable
+import client.NetworkService
+import utils.Links
+import utils.Shop
 
 class GetAtbData {
 

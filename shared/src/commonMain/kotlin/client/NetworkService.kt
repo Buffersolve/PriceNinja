@@ -1,4 +1,4 @@
-package ua.priceninja.data.network.client
+package client
 
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -9,6 +9,7 @@ class NetworkService(private val client: HttpClient) {
 
     suspend fun fetchData(url: String): String {
         val response: HttpResponse = client.get(url)
+        println(response.status)
         return response.body()
     }
 

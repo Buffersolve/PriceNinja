@@ -1,9 +1,9 @@
-package ua.priceninja.di
+package di
 
+import db.DatabaseSettings
+import db.ItemDAO
 import org.jetbrains.exposed.sql.Database
 import org.koin.dsl.module
-import ua.priceninja.data.db.DatabaseSettings
-import ua.priceninja.data.db.ItemDAO
 
 val databaseModule = module {
     single {

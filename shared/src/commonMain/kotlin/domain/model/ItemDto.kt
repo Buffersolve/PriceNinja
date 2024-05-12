@@ -1,4 +1,4 @@
-package ua.priceninja.domain.model
+package domain.model
 
 import kotlinx.serialization.Serializable
 

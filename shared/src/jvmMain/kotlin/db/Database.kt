@@ -1,4 +1,4 @@
-package ua.priceninja.data.db
+package db
 
 object DatabaseSettings {
     val url = "jdbc:h2:mem:test"

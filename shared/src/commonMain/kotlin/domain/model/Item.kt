@@ -1,9 +1,9 @@
-package ua.priceninja.domain.model
+package domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import ua.priceninja.utils.Shop
+import utils.Shop
 
 @Serializable
 data class Item(

@@ -18,7 +18,7 @@ dependencies {
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.server.netty)
 
-    implementation("io.ktor:ktor-serialization:1.6.4")
+    implementation("io.ktor:ktor-serialization:2.3.10")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
 
 //    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")

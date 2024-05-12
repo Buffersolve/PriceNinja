@@ -1,12 +1,12 @@
-package ua.priceninja.data.db
+package db
 
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
-import ua.priceninja.data.db.ItemsTable.shop
-import ua.priceninja.domain.model.Item
-import ua.priceninja.utils.Shop
+import db.ItemsTable.shop
+import domain.model.Item
+import utils.Shop
 
 object ItemsTable : IntIdTable() {
     val shop = varchar("shop", 50).default("Silpo")

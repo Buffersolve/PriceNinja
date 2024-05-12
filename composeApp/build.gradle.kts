@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 kotlin {
@@ -31,6 +32,11 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+
+//            implementation("io.insert-koin:koin-android:3.5.6")
+            implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.0-alpha06")
+//            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -45,6 +51,24 @@ kotlin {
             implementation(libs.voyager.screenmodel)
             implementation(libs.voyager.tab.navigator)
             implementation(libs.voyager.transitions)
+
+            val ktorVersion = "2.3.10"
+            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
+            implementation("io.insert-koin:koin-compose:1.1.5")
+            implementation("io.insert-koin:koin-core:3.5.6")
+
+//            implementation("io.coil-kt.coil3:coil:3.0.0-alpha06")
+//            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+
+            implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha06")
+            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+        }
+        iosMain.dependencies {
+            val ktorVersion = "2.3.10"
+
+//            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
         }
     }
 }

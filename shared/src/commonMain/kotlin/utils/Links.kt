@@ -1,4 +1,4 @@
-package ua.priceninja.utils
+package utils
 
 object Links {
 
