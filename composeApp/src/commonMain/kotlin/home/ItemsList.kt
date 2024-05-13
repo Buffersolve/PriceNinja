@@ -1,5 +1,8 @@
 package home
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,8 +15,14 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import domain.model.Item
 import pxToDp
@@ -23,7 +32,8 @@ fun ItemsList(itemsList: List<Item>) {
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         items(itemsList.size) {
             Item(item = itemsList[it])
@@ -46,12 +56,35 @@ fun ItemsList(itemsList: List<Item>) {
 
 @Composable
 fun Item(item: Item) {
-    AsyncImage(
-        model = item.image,
-        contentDescription = "Item Image",
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .padding(8.dp)
-    )
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        AsyncImage(
+            model = item.image,
+            contentDescription = "Item Image",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+        )
+        Text(
+            text = item.name,
+            modifier = Modifier,
+            style = TextStyle(fontSize = 14.sp, color = Color.Black, fontWeight = FontWeight.Bold)
+        )
+        if (item.oldPrice != null) {
+            Text(
+                text = item.oldPrice?.toString() + "грн",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    textDecoration = TextDecoration.LineThrough,
+                )
+            )
+        }
+        Text(
+            text = item.discountPrice.toString() + "грн",
+            style = TextStyle(fontSize = 14.sp, color = Color.Red, fontWeight = FontWeight.Bold),
+        )
+
+    }
 }

@@ -56,10 +56,9 @@ object HomeTab : Tab {
             screenModel.fetchAllData()
         }
 
-        Column {
+        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp)
-                    .padding(top = pxToDp(WindowInsets.statusBars.getTop(density)).dp),
+                modifier = Modifier.fillMaxWidth().padding(top = pxToDp(WindowInsets.statusBars.getTop(density)).dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 TopShopChips(text = "All")
@@ -80,7 +79,6 @@ object HomeTab : Tab {
                 }
             }
 
-//            ItemsList()
         }
     }
 

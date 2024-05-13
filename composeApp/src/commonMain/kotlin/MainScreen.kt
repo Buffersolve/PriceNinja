@@ -1,3 +1,4 @@
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -58,6 +59,7 @@ object MainScreen : Screen {
                                 color = Color.Black,
                                 shape = RoundedCornerShape(36.dp)
                             )
+                            .background(Color.White, shape = RoundedCornerShape(36.dp))
                             .padding(horizontal = 24.dp, vertical = 4.dp)
                             .align(Alignment.BottomCenter),
                         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
