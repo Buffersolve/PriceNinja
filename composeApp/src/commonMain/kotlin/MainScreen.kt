@@ -9,13 +9,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -34,6 +39,11 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cards.CardsTab
 import home.HomeTab
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.vectorResource
+import priceninjakmp.composeapp.generated.resources.Res
+import priceninjakmp.composeapp.generated.resources.scan
+import scanner.ScannerTab
 
 object MainScreen : Screen {
 
@@ -46,25 +56,24 @@ object MainScreen : Screen {
                 CurrentTab()
             }, bottomBar = {
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     Row(
                         modifier = Modifier
-                            .wrapContentSize()
-                            .padding(bottom = pxToDp(WindowInsets.navigationBars.getBottom(density)).dp)
-                            .border(
-                                width = 2.dp,
-                                color = Color.Black,
-                                shape = RoundedCornerShape(36.dp)
+                            .wrapContentHeight()
+                            .fillMaxWidth()
+                            .padding(
+                                bottom = pxToDp(WindowInsets.navigationBars.getBottom(density)).dp,
+                                start = 16.dp,
+                                end = 16.dp
                             )
-                            .background(Color.White, shape = RoundedCornerShape(36.dp))
-                            .padding(horizontal = 24.dp, vertical = 4.dp)
+                            .background(color = GrayNavNar, shape = RoundedCornerShape(64.dp))
+                            .padding(horizontal = 24.dp, vertical = 16.dp)
                             .align(Alignment.BottomCenter),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                        horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         TabNavigationItem(HomeTab, tabNavigator)
+                        CenterNavItem(ScannerTab, tabNavigator)
                         TabNavigationItem(CardsTab, tabNavigator)
                     }
                 }
@@ -75,17 +84,16 @@ object MainScreen : Screen {
 
     @Composable
     private fun TabNavigationItem(screenTab: Tab, tabNavigator: TabNavigator) {
-//        val tabNavigator = LocalTabNavigator.current
         val selected = tabNavigator.current == screenTab
         val interactionSource = remember { MutableInteractionSource() }
 
-        var iconColor by rememberSaveable { mutableIntStateOf(Color.Gray.toArgb()) }
-        var textColor by rememberSaveable { mutableIntStateOf(Color.Gray.toArgb()) }
+        var iconColor by rememberSaveable { mutableIntStateOf(Gray.toArgb()) }
+        var textColor by rememberSaveable { mutableIntStateOf(Gray.toArgb()) }
 
-        iconColor = if (selected) Color.Black.toArgb() else Color.Gray.toArgb()
-        textColor = if (selected) Color.Black.toArgb() else Color.Gray.toArgb()
+        iconColor = if (selected) Main.toArgb() else Gray.toArgb()
+        textColor = if (selected) Main.toArgb() else Gray.toArgb()
 
-        BoxWithConstraints(
+        Box(
             modifier = Modifier
                 .clickable(
                     interactionSource = interactionSource,
@@ -115,5 +123,29 @@ object MainScreen : Screen {
             }
         }
     }
+
+    @OptIn(ExperimentalResourceApi::class)
+    @Composable
+    fun CenterNavItem(screenTab: Tab, tabNavigator: TabNavigator) {
+        Box(
+            modifier = Modifier.size(56.dp).background(Main, shape = RoundedCornerShape(28.dp))
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = null,
+                    onClick = {
+                        tabNavigator.current = screenTab
+                    })
+        ) {
+            Icon(
+                imageVector = vectorResource(Res.drawable.scan),
+                contentDescription = "Cart",
+                tint = Color.White,
+                modifier = Modifier.size(24.dp).align(Alignment.Center)
+            )
+
+
+        }
+    }
+
 
 }

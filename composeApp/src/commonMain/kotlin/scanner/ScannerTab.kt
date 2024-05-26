@@ -1,28 +1,23 @@
-package cards
+package scanner
 
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.card
+import priceninjakmp.composeapp.generated.resources.scan
 
-object CardsTab : Tab {
+object ScannerTab : Tab {
 
     @OptIn(ExperimentalResourceApi::class)
     override val options: TabOptions
         @Composable
         get() {
-            val title = "Cards"
-            val icon = painterResource(Res.drawable.card)
+            val title = "Scanner"
+            val icon = painterResource(Res.drawable.scan)
 
             return remember {
                 TabOptions(
@@ -35,7 +30,7 @@ object CardsTab : Tab {
 
     @Composable
     override fun Content() {
-        Text("Cards")
+        Text("Scanner")
 
     }
 
