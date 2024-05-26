@@ -63,6 +63,9 @@ kotlin {
 
             implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha06")
             implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+
+            implementation("io.github.kalinjul.easyqrscan:scanner:0.1.3")
+
         }
         iosMain.dependencies {
             val ktorVersion = "2.3.10"

@@ -1,26 +1,20 @@
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -41,6 +35,8 @@ import cards.CardsTab
 import home.HomeTab
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.vectorResource
+import org.publicvalue.multiplatform.qrcode.CodeType
+import org.publicvalue.multiplatform.qrcode.ScannerWithPermissions
 import priceninjakmp.composeapp.generated.resources.Res
 import priceninjakmp.composeapp.generated.resources.scan
 import scanner.ScannerTab
@@ -73,7 +69,7 @@ object MainScreen : Screen {
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         TabNavigationItem(HomeTab, tabNavigator)
-                        CenterNavItem(ScannerTab, tabNavigator)
+                        ScannerNavItem(ScannerTab, tabNavigator)
                         TabNavigationItem(CardsTab, tabNavigator)
                     }
                 }
@@ -126,7 +122,7 @@ object MainScreen : Screen {
 
     @OptIn(ExperimentalResourceApi::class)
     @Composable
-    fun CenterNavItem(screenTab: Tab, tabNavigator: TabNavigator) {
+    fun ScannerNavItem(screenTab: Tab, tabNavigator: TabNavigator) {
         Box(
             modifier = Modifier.size(56.dp).background(Main, shape = RoundedCornerShape(28.dp))
                 .clickable(
@@ -138,7 +134,7 @@ object MainScreen : Screen {
         ) {
             Icon(
                 imageVector = vectorResource(Res.drawable.scan),
-                contentDescription = "Cart",
+                contentDescription = "Scan",
                 tint = Color.White,
                 modifier = Modifier.size(24.dp).align(Alignment.Center)
             )
