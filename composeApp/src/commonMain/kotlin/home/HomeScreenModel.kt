@@ -1,6 +1,6 @@
 package home
 
-import NetworkState
+import utils.NetworkState
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import domain.model.Item

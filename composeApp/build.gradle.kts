@@ -36,6 +36,7 @@ kotlin {
 //            implementation("io.insert-koin:koin-android:3.5.6")
             implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.0-alpha06")
 //            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+            implementation("com.liftric:kvault:1.11.0")
 
         }
         commonMain.dependencies {
@@ -66,8 +67,11 @@ kotlin {
 
             implementation("io.github.kalinjul.easyqrscan:scanner:0.1.3")
 
+
         }
         iosMain.dependencies {
+            implementation("com.liftric:kvault:1.11.0")
+
             val ktorVersion = "2.3.10"
 
 //            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")

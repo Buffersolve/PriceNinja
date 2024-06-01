@@ -1,3 +1,5 @@
+package utils
+
 import androidx.compose.ui.graphics.Color
 
 val Main = Color(red = 227, green = 59, blue = 59)

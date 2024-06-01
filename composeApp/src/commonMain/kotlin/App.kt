@@ -3,15 +3,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalDensity
 import cafe.adriel.voyager.navigator.Navigator
 import di.startKoinApp
+import onboard.OnBoardingScreen
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.core.KoinApplication
 
 @Composable
 @Preview
-fun App() {
+fun App(
+    writeString: (Pair<String, String>) -> Unit,
+    writeInt: (Pair<String, Int>) -> Unit,
+    writeBoolean: (Pair<String, Boolean>) -> Unit,
+
+    readString: (String) -> String?,
+    readInt: (String) -> Int?,
+    readBoolean: (String) -> Boolean?,
+
+    showOnboarding: Boolean
+) {
     startKoinApp()
+
     MaterialTheme {
-        Navigator(MainScreen)
+        Navigator(if (showOnboarding) OnBoardingScreen(writeBoolean = writeBoolean) else MainScreen)
     }
 
 }

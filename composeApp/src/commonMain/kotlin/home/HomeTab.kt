@@ -1,9 +1,9 @@
 package home
 
-import Gray
-import GrayNavNar
-import Main
-import NetworkState
+import utils.Gray
+import utils.GrayNavNar
+import utils.Main
+import utils.NetworkState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +17,6 @@ import androidx.compose.material.ChipDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -59,9 +58,9 @@ object HomeTab : Tab {
         val density = LocalDensity.current
         val screenModel: HomeScreenModel = rememberScreenModel { HomeScreenModel() }
 
-        LaunchedEffect(Unit) {
-            screenModel.fetchAllData()
-        }
+//        LaunchedEffect(Unit) {
+//            screenModel.fetchAllData()
+//        }
 
         val chipsList = listOf("All", "ATB", "Silpo")
         val activeChip = remember { mutableStateOf(0) }
@@ -78,7 +77,18 @@ object HomeTab : Tab {
                 }
             }
 
-            when (val data = screenModel.allData.collectAsState().value) {
+            when (activeChip.value) {
+                0 -> screenModel.fetchAllData()
+                1 -> screenModel.fetchAtbData()
+                2 -> screenModel.fetchSilpoData()
+            }
+
+            when (val data = when(activeChip.value) {
+                0 -> screenModel.allData.collectAsState()
+                1 -> screenModel.atbData.collectAsState()
+                2 -> screenModel.silpoData.collectAsState()
+                else -> error("Unknown chip")
+            }.value) {
                 is NetworkState.Loading -> {
                     Text(text = "Loading...")
                 }

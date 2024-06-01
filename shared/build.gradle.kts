@@ -37,10 +37,10 @@ kotlin {
 
             implementation("io.insert-koin:koin-core:3.5.6")
 
-
         }
         androidMain.dependencies {
             implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+            implementation("com.liftric:kvault:1.12.0")
 
 //            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
 //            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
@@ -50,6 +50,7 @@ kotlin {
             implementation("io.ktor:ktor-client-darwin:$ktorVersion")
 //            implementation("io.ktor:ktor-client-core-jvm:2.3.10")
 //            implementation("io.ktor:ktor-client-okhttp:2.3.10")
+            implementation("com.liftric:kvault:1.12.0")
 
         }
         jvmMain.dependencies {

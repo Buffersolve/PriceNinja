@@ -1,3 +1,6 @@
+import utils.Gray
+import utils.GrayNavNar
+import utils.Main
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -35,8 +38,6 @@ import cards.CardsTab
 import home.HomeTab
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.vectorResource
-import org.publicvalue.multiplatform.qrcode.CodeType
-import org.publicvalue.multiplatform.qrcode.ScannerWithPermissions
 import priceninjakmp.composeapp.generated.resources.Res
 import priceninjakmp.composeapp.generated.resources.scan
 import scanner.ScannerTab
@@ -70,7 +71,9 @@ object MainScreen : Screen {
                     ) {
                         TabNavigationItem(HomeTab, tabNavigator)
                         ScannerNavItem(ScannerTab, tabNavigator)
-                        TabNavigationItem(CardsTab, tabNavigator)
+                        TabNavigationItem(CardsTab {
+                            tabNavigator.current = ScannerTab
+                        }, tabNavigator, )
                     }
                 }
 

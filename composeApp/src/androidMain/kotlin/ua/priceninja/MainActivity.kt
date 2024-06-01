@@ -2,38 +2,18 @@ package ua.priceninja
 
 import App
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.liftric.kvault.KVault
+import utils.IS_SHOW_ON_BOARDING
+import utils.settings
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
@@ -46,14 +26,21 @@ class MainActivity : ComponentActivity() {
                 Color.Transparent.toArgb()
             )
         )
+
+        val store = KVault(this, settings)
+        val showOnBoarding = store.bool(IS_SHOW_ON_BOARDING) ?: true
+
         setContent {
-            App()
+            App(
+                writeString = { store.set(key = it.first, stringValue = it.second) },
+                writeInt = { store.set(key = it.first, intValue = it.second) },
+                writeBoolean = { store.set(key = it.first, boolValue = it.second) },
+                readString = { store.string(it) },
+                readInt = { store.int(it) },
+                readBoolean = { store.bool(it) },
+
+                showOnboarding = showOnBoarding
+            )
         }
     }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
 }
