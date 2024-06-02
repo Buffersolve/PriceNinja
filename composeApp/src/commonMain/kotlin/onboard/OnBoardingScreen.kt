@@ -39,12 +39,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.TabDisposable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import kotlinx.coroutines.launch
+import navigation.SharedScreen
 import pxToDp
 
 class OnBoardingScreen(
@@ -106,7 +108,7 @@ class OnBoardingScreen(
                             }
                         } else {
                             writeBoolean(IS_SHOW_ON_BOARDING to false)
-                            navigator.push(MainScreen)
+                            navigator.push(ScreenRegistry.get(SharedScreen.MainScreen))
                         }
                     },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Main),
@@ -151,7 +153,12 @@ class OnBoardingScreen(
     }
 
     @Composable
-    fun DotsIndicator(modifier: Modifier = Modifier, totalDots: Int, selectedIndex: Int, dotClickCallBack: (Int) -> Unit = {}) {
+    fun DotsIndicator(
+        modifier: Modifier = Modifier,
+        totalDots: Int,
+        selectedIndex: Int,
+        dotClickCallBack: (Int) -> Unit = {}
+    ) {
         Row(
             modifier = modifier,
             horizontalArrangement = Arrangement.Center,

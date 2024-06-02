@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import com.liftric.kvault.KVault
+import utils.IS_FIRST_START
 import utils.IS_SHOW_ON_BOARDING
 import utils.settings
 
@@ -28,17 +29,18 @@ class MainActivity : ComponentActivity() {
         )
 
         val store = KVault(this, settings)
+        val isFirstStart = store.bool(IS_FIRST_START) ?: true
         val showOnBoarding = store.bool(IS_SHOW_ON_BOARDING) ?: true
 
         setContent {
             App(
                 writeString = { store.set(key = it.first, stringValue = it.second) },
-                writeInt = { store.set(key = it.first, intValue = it.second) },
+                writeLong = { store.set(key = it.first, longValue = it.second) },
                 writeBoolean = { store.set(key = it.first, boolValue = it.second) },
                 readString = { store.string(it) },
-                readInt = { store.int(it) },
+                readLong = { store.long(it) },
                 readBoolean = { store.bool(it) },
-
+                isFirstStart = isFirstStart,
                 showOnboarding = showOnBoarding
             )
         }

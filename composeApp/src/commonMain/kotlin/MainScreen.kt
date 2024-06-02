@@ -30,24 +30,41 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.registry.ScreenProvider
+import cafe.adriel.voyager.core.registry.ScreenRegistry
+import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cards.CardsTab
 import home.HomeTab
+import navigation.SharedScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.vectorResource
 import priceninjakmp.composeapp.generated.resources.Res
 import priceninjakmp.composeapp.generated.resources.scan
 import scanner.ScannerTab
+import kotlin.jvm.Transient
 
-object MainScreen : Screen {
+class MainScreen(
+    @Transient private val writeLong: (Pair<String, Long>) -> Unit,
+    @Transient private val writeString: (Pair<String, String>) -> Unit,
+    @Transient private val readLong: (String) -> Long?,
+) : Screen {
 
     @Composable
     override fun Content() {
+//        val homeTab = rememberScreen(SharedScreen.HomeTab) as Tab
+//        val scannerTab = rememberScreen(SharedScreen.ScannerTab) as Tab
+
+
         TabNavigator(tab = HomeTab) { tabNavigator ->
             val density = LocalDensity.current
+
+//            val cardsTab = rememberScreen(SharedScreen.CardsTab {
+//                tabNavigator.current = scannerTab
+//            }) as Tab
 
             Scaffold(content = {
                 CurrentTab()
@@ -69,11 +86,17 @@ object MainScreen : Screen {
                             .align(Alignment.BottomCenter),
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
-                        TabNavigationItem(HomeTab, tabNavigator)
-                        ScannerNavItem(ScannerTab, tabNavigator)
-                        TabNavigationItem(CardsTab {
-                            tabNavigator.current = ScannerTab
-                        }, tabNavigator, )
+                        TabNavigationItem(
+                            ScreenRegistry.get(SharedScreen.HomeTab) as Tab,
+                            tabNavigator
+                        )
+                        ScannerNavItem(
+                            ScreenRegistry.get(SharedScreen.ScannerTab) as Tab,
+                            tabNavigator
+                        )
+                        TabNavigationItem(ScreenRegistry.get(SharedScreen.CardsTab {
+                            tabNavigator.current = ScannerTab(writeString, readLong)
+                        }) as Tab, tabNavigator)
                     }
                 }
 
