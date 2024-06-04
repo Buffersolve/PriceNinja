@@ -40,6 +40,7 @@ class MainActivity : ComponentActivity() {
                 readString = { store.string(it) },
                 readLong = { store.long(it) },
                 readBoolean = { store.bool(it) },
+                delete = { store.deleteObject(it) },
                 isFirstStart = isFirstStart,
                 showOnboarding = showOnBoarding
             )

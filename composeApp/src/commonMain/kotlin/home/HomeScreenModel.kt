@@ -79,12 +79,31 @@ class HomeScreenModel : ScreenModel {
         }
     }
 
+    private val _blyzenkoData: MutableStateFlow<NetworkState> = MutableStateFlow(NetworkState.Loading)
+    val blyzenkoData = _blyzenkoData.asStateFlow()
+
+    fun fetchBlyzenkoData() = screenModelScope.launch(Dispatchers.IO) {
+        val networkService = NetworkServiceHelper().getNetworkServiceClient()
+        try {
+            val data = networkService.fetchData(BLYZENKO_URL)
+            val blyzenkoJson: List<Item> = Json.decodeFromString(data)
+            _blyzenkoData.value = NetworkState.Success(blyzenkoJson)
+            println(blyzenkoJson)
+        } catch (e: Exception) {
+            _blyzenkoData.value = NetworkState.Error(true, e.message)
+            e.printStackTrace()
+        }
+    }
+
     companion object {
         private val BASE_URL = if (getPlatform().name.contains("iOS")) "http://localhost:8080" else "http://10.0.2.2:8080"
+//        private val BASE_URL = "http://localhost:8080"
+//        private val BASE_URL = "http:/0.0.0.0:8080"
         private val SHOPS_URL = "$BASE_URL/shops"
         private val ALL_DATA_URL = "$BASE_URL/data"
         private val SILPO_URL = "$BASE_URL/data/silpo"
         private val ATB_URL = "$BASE_URL/data/atb"
+        private val BLYZENKO_URL = "$BASE_URL/data/blyzenko"
     }
 
 }

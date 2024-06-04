@@ -11,4 +11,7 @@ sealed class SharedScreen : ScreenProvider {
     data class CardsTab(
         @Transient val onAddCardClick: () -> Unit,
     ) : SharedScreen()
+    data class CardScreen (
+        val title: String
+    ) : SharedScreen()
 }

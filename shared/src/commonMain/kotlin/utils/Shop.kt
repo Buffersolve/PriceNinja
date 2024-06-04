@@ -3,5 +3,6 @@ package utils
 enum class Shop {
     SILPO,
     ATB,
-    RUKAVYCHKA
+    BLYZENKO,
+//    RUKAVYCHKA,
 }

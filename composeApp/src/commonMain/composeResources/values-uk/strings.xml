@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="title_on_board_1">3 супермаркети в 1 додатку</string>
+    <string name="subtitle_on_board_1">Переглядайте знижки на улюблені товари в одному додатку</string>
+    <string name="title_on_board_2">Скануйте карти лояльності</string>
+    <string name="subtitle_on_board_2">Скануйте та добавляйте карти в один додаток</string>
+    <string name="title_on_board_3">Гаманець знижок</string>
+    <string name="subtitle_on_board_3">Зберігайте знижкові картки супермаркетів в одному додатку</string>
+
+    <string name="all">Всі</string>
+
+    <string name="atb">АТБ</string>
+    <string name="silpo">Сільпо</string>
+    <string name="blyzenko">Близенько</string>
+
+    <string name="loading">Завантаження...</string>
+
+    <string name="next">Далі</string>
+
+    <string name="delete_card">Видалити картку</string>
+    <string name="delete_card_screen">Видалення картки з екрану</string>
+
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
+
+    <string name="you_dont_have_saved_cards">У вас ще немає збережених карток</string>
+
+    <string name="home">Головна</string>
+    <string name="cards">Картки</string>
+
+</resources>

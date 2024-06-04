@@ -19,6 +19,7 @@ import ua.priceninja.data.network.GetSilpoData
 import ua.priceninja.data.parser.GetAtbData
 import di.startKoinApp
 import domain.model.Item
+import ua.priceninja.data.parser.GetBlyzenkoData
 import utils.Shop
 
 fun main() {
@@ -36,6 +37,7 @@ fun Application.module() {
     var allData = emptyList<Item>()
     var silpoData = emptyList<Item>()
     var atbData = emptyList<Item>()
+    var blyzenkoData = emptyList<Item>()
 
     transaction(db = database) {
         SchemaUtils.create(ItemsTable)
@@ -51,6 +53,12 @@ fun Application.module() {
             GetAtbData().fetchDataParser()
         }
         atbData = itemDAO.getAtbItems()
+
+        // Blyzenko
+        runBlocking(Dispatchers.IO) {
+            GetBlyzenkoData().fetchDataParser()
+        }
+        blyzenkoData = itemDAO.getBlyzenkoItems()
 
         // ALL
         allData = itemDAO.getAllItems()
@@ -73,9 +81,9 @@ fun Application.module() {
         get("/data/atb") {
             call.respond(atbData)
         }
+        get("/data/blyzenko") {
+            call.respond(blyzenkoData)
+        }
     }
 
 }
-
-//@Serializable
-//data class Data(val shop: String)

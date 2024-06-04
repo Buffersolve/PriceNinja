@@ -11,7 +11,7 @@ import utils.Shop
 object ItemsTable : IntIdTable() {
     val shop = varchar("shop", 50).default("Silpo")
     val name = varchar("title", 255)
-    val image = varchar("icon", 255)
+    val image = varchar("icon", 512)
     val discountPrice = double("price")
     val oldPrice = double("oldPrice").nullable()
 }
@@ -38,6 +38,13 @@ class ItemDAO {
     fun getAtbItems(): List<Item> {
         return transaction {
             ItemsTable.selectAll().where { shop eq Shop.ATB.name }
+                .map { it.toItem() }
+        }
+    }
+
+    fun getBlyzenkoItems(): List<Item> {
+        return transaction {
+            ItemsTable.selectAll().where { shop eq Shop.BLYZENKO.name }
                 .map { it.toItem() }
         }
     }

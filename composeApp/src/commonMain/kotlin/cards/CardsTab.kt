@@ -27,17 +27,28 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
+import cafe.adriel.voyager.core.registry.ScreenProvider
+import cafe.adriel.voyager.core.registry.ScreenRegistry
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import navigation.SharedScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.resources.stringResource
 import priceninjakmp.composeapp.generated.resources.Res
 import priceninjakmp.composeapp.generated.resources.atb
+import priceninjakmp.composeapp.generated.resources.blyzenko
 import priceninjakmp.composeapp.generated.resources.card
+import priceninjakmp.composeapp.generated.resources.cards
 import priceninjakmp.composeapp.generated.resources.empty_card
 import priceninjakmp.composeapp.generated.resources.plus
 import priceninjakmp.composeapp.generated.resources.rukavychka
 import priceninjakmp.composeapp.generated.resources.silpo
+import priceninjakmp.composeapp.generated.resources.you_dont_have_saved_cards
 import pxToDp
 import utils.Gray
 import utils.GrayNavNar
@@ -49,13 +60,14 @@ class CardsTab(
     @Transient private val writeLong: (Pair<String, Long>) -> Unit,
     @Transient private val readLong: (String) -> Long?,
     @Transient private val readString: (String) -> String?,
+    @Transient private val writeString: (Pair<String, String>) -> Unit,
 ) : Tab {
 
     @OptIn(ExperimentalResourceApi::class)
     override val options: TabOptions
         @Composable
         get() {
-            val title = "Cards"
+            val title = stringResource(Res.string.cards)
             val icon = painterResource(Res.drawable.card)
 
             return remember {
@@ -74,15 +86,13 @@ class CardsTab(
 //        val listOfShops = mutableListOf<String>().apply {
 //            Shop.entries.forEach { add(it.toString()) }
 //        }
+        val navigator = LocalNavigator.currentOrThrow.parent
         val listOfShops = Shop.entries.map { it.toString() }
         val cardExistFromShop = listOfShops.filter {
             readLong(it) != null
         }
 
-        println(cardExistFromShop.size)
-
         Column(modifier = Modifier.padding(top = pxToDp(WindowInsets.statusBars.getTop(LocalDensity.current)).dp)) {
-
             if (cardExistFromShop.isEmpty()) {
                 Box(
                     modifier = Modifier.fillMaxWidth()
@@ -101,7 +111,7 @@ class CardsTab(
                 Text(
                     modifier = Modifier.align(Alignment.CenterHorizontally)
                         .padding(top = 12.dp),
-                    text = "У вас ще немає збережених карток"
+                    text = stringResource(Res.string.you_dont_have_saved_cards)
                 )
             } else {
                 Column(
@@ -114,21 +124,28 @@ class CardsTab(
 
                     if (readString(Shop.ATB.toString()) != null) {
                         AtbCard {
-
+                            navigator?.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.ATB.toString())))
                         }
                     }
 
                     if (readString(Shop.SILPO.toString()) != null) {
                         SilpoCard {
-
+                            navigator?.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.SILPO.toString())))
                         }
                     }
 
-                    if (readString(Shop.RUKAVYCHKA.toString()) != null) {
-                        RukavychkaCard {
-
+                    if (readString(Shop.BLYZENKO.toString()) != null) {
+                        BlyzenkoCard {
+                            navigator?.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.BLYZENKO.toString())))
                         }
                     }
+
+//                    if (readString(Shop.RUKAVYCHKA.toString()) != null) {
+//                        RukavychkaCard {
+//
+//                        }
+//                    }
+
 
                 }
 
@@ -204,9 +221,40 @@ class CardsTab(
         }
     }
 
+//    @OptIn(ExperimentalResourceApi::class)
+//    @Composable
+//    fun RukavychkaCard(onCardClick: () -> Unit) {
+//        Box(
+//            modifier = Modifier.fillMaxWidth().clickable(
+//                onClick = onCardClick,
+//                interactionSource = remember { MutableInteractionSource() },
+//                indication = null
+//            )
+//                .height(210.dp)
+//                .padding(horizontal = 16.dp)
+//                .padding(top = 6.dp)
+//                .background(
+//                    shape = RoundedCornerShape(16.dp),
+//                    brush = Brush.horizontalGradient(
+//                        listOf(
+//                            Color(red = 155, green = 14, blue = 58),
+//                            Color(red = 137, green = 45, blue = 74)
+//                        )
+//                    )
+//                )
+//        ) {
+//            Icon(
+//                modifier = Modifier.align(Alignment.Center).size(200.dp),
+//                painter = painterResource(Res.drawable.rukavychka),
+//                tint = Color.White,
+//                contentDescription = "Card"
+//            )
+//        }
+//    }
+
     @OptIn(ExperimentalResourceApi::class)
     @Composable
-    fun RukavychkaCard(onCardClick: () -> Unit) {
+    fun BlyzenkoCard(onCardClick: () -> Unit) {
         Box(
             modifier = Modifier.fillMaxWidth().clickable(
                 onClick = onCardClick,
@@ -220,16 +268,16 @@ class CardsTab(
                     shape = RoundedCornerShape(16.dp),
                     brush = Brush.horizontalGradient(
                         listOf(
-                            Color(red = 155, green = 14, blue = 58),
-                            Color(red = 137, green = 45, blue = 74)
+                            Color(red = 33, green = 47, blue = 50),
+                            Color(red = 45, green = 64, blue = 68)
                         )
                     )
                 )
         ) {
             Icon(
                 modifier = Modifier.align(Alignment.Center).size(200.dp),
-                painter = painterResource(Res.drawable.rukavychka),
-                tint = Color.White,
+                painter = painterResource(Res.drawable.blyzenko),
+                tint = Color(red = 143, green = 200, blue = 91),
                 contentDescription = "Card"
             )
         }

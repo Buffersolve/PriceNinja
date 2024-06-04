@@ -47,13 +47,25 @@ import cafe.adriel.voyager.navigator.tab.TabDisposable
 import cafe.adriel.voyager.navigator.tab.TabNavigator
 import kotlinx.coroutines.launch
 import navigation.SharedScreen
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.InternalResourceApi
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
+import priceninjakmp.composeapp.generated.resources.Res
+import priceninjakmp.composeapp.generated.resources.next
+import priceninjakmp.composeapp.generated.resources.subtitle_on_board_1
+import priceninjakmp.composeapp.generated.resources.subtitle_on_board_2
+import priceninjakmp.composeapp.generated.resources.subtitle_on_board_3
+import priceninjakmp.composeapp.generated.resources.title_on_board_1
+import priceninjakmp.composeapp.generated.resources.title_on_board_2
+import priceninjakmp.composeapp.generated.resources.title_on_board_3
 import pxToDp
 
 class OnBoardingScreen(
     private val writeBoolean: (Pair<String, Boolean>) -> Unit,
 ) : Screen {
 
-    @OptIn(ExperimentalFoundationApi::class)
+    @OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -61,18 +73,18 @@ class OnBoardingScreen(
         val tabsCollection = listOf(
             OnBoardingTab(
                 1,
-                "5 супермаркетів в 1 додатку",
-                "Переглядайте знижки на улюблені товари в одному додатку"
+                stringResource(Res.string.title_on_board_1),
+                stringResource(Res.string.subtitle_on_board_1)
             ),
             OnBoardingTab(
                 2,
-                "Скануйте знижкові карти",
-                "Скануйте та добавляйте карти в один додаток"
+                stringResource(Res.string.title_on_board_2),
+                stringResource(Res.string.subtitle_on_board_2)
             ),
             OnBoardingTab(
                 3,
-                "Гаманець знижок",
-                "Зберігайте знижкові картки супермаркетів в одному додатку"
+                stringResource(Res.string.title_on_board_3),
+                stringResource(Res.string.subtitle_on_board_3)
             )
         )
         val pagerState = rememberPagerState(pageCount = { tabsCollection.count() }, initialPage = 0)
@@ -119,7 +131,11 @@ class OnBoardingScreen(
                         .padding(horizontal = 16.dp)
                         .clip(shape = RoundedCornerShape(8.dp))
                 ) {
-                    Text(modifier = Modifier.padding(8.dp), text = "Next", color = Color.White)
+                    Text(
+                        modifier = Modifier.padding(8.dp),
+                        text = stringResource(Res.string.next),
+                        color = Color.White
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))
