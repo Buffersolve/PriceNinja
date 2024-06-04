@@ -1,6 +1,8 @@
 package home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -26,7 +29,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import domain.model.Item
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import priceninjakmp.composeapp.generated.resources.Res
+import priceninjakmp.composeapp.generated.resources.atb
+import priceninjakmp.composeapp.generated.resources.atb_bage
+import priceninjakmp.composeapp.generated.resources.blyzenko_bage
+import priceninjakmp.composeapp.generated.resources.card
+import priceninjakmp.composeapp.generated.resources.scan
+import priceninjakmp.composeapp.generated.resources.silpo
+import priceninjakmp.composeapp.generated.resources.silpo_bage
+import priceninjakmp.composeapp.generated.resources.trash
 import pxToDp
+import utils.Shop
 
 @Composable
 fun ItemsList(itemsList: List<Item>) {
@@ -55,37 +70,59 @@ fun ItemsList(itemsList: List<Item>) {
 
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun Item(item: Item) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        AsyncImage(
-            model = item.image,
-            contentDescription = "Item Image",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp)
-        )
-        Text(
-            text = item.name,
-            modifier = Modifier,
-            style = TextStyle(fontSize = 15.sp, color = Color.Black, fontWeight = FontWeight.Medium)
-        )
-        if (item.oldPrice != null) {
+    Box {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            AsyncImage(
+                model = item.image,
+                contentDescription = "Item Image",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
             Text(
-                text = item.oldPrice?.toString() + " грн",
+                text = item.name,
+                modifier = Modifier,
                 style = TextStyle(
-                    fontSize = 12.sp,
-                    color = Color.Gray,
-                    textDecoration = TextDecoration.LineThrough,
+                    fontSize = 15.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Medium
                 )
             )
-        }
-        Text(
-            text = item.discountPrice.toString() + " грн",
-            style = TextStyle(fontSize = 15.sp, color = Color.Red, fontWeight = FontWeight.Medium),
-        )
+            if (item.oldPrice != null) {
+                Text(
+                    text = item.oldPrice?.toString() + " грн",
+                    style = TextStyle(
+                        fontSize = 12.sp,
+                        color = Color.Gray,
+                        textDecoration = TextDecoration.LineThrough,
+                    )
+                )
+            }
+            Text(
+                text = item.discountPrice.toString() + " грн",
+                style = TextStyle(
+                    fontSize = 15.sp,
+                    color = Color.Red,
+                    fontWeight = FontWeight.Medium
+                ),
+            )
 
+        }
+        Image(
+            painter = when (item.shop) {
+                Shop.SILPO.name -> painterResource(Res.drawable.silpo_bage)
+                Shop.ATB.name -> painterResource(Res.drawable.atb_bage)
+                Shop.BLYZENKO.name -> painterResource(Res.drawable.blyzenko_bage)
+                else -> painterResource(Res.drawable.card)
+            },
+            contentDescription = "Item Bage",
+            modifier = Modifier.size(56.dp).padding(top = 4.dp, start = 4.dp)
+        )
     }
+
 }

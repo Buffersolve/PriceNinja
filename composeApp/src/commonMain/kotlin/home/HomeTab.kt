@@ -87,15 +87,15 @@ object HomeTab : Tab {
 
             when (activeChip.value) {
                 0 -> screenModel.fetchAllData()
-                1 -> screenModel.fetchAtbData()
-                2 -> screenModel.fetchSilpoData()
+                1 -> screenModel.fetchSilpoData()
+                2 -> screenModel.fetchAtbData()
                 3 -> screenModel.fetchBlyzenkoData()
             }
 
             when (val data = when (activeChip.value) {
                 0 -> screenModel.allData.collectAsState()
-                1 -> screenModel.atbData.collectAsState()
-                2 -> screenModel.silpoData.collectAsState()
+                1 -> screenModel.silpoData.collectAsState()
+                2 -> screenModel.atbData.collectAsState()
                 3 -> screenModel.blyzenkoData.collectAsState()
                 else -> screenModel.allData.collectAsState()
             }.value) {
