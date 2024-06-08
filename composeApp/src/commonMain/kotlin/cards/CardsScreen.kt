@@ -27,14 +27,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.annotation.InternalVoyagerApi
-import cafe.adriel.voyager.core.registry.ScreenProvider
 import cafe.adriel.voyager.core.registry.ScreenRegistry
+import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import cafe.adriel.voyager.navigator.tab.Tab
-import cafe.adriel.voyager.navigator.tab.TabOptions
 import navigation.SharedScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
@@ -42,11 +38,8 @@ import org.jetbrains.compose.resources.stringResource
 import priceninjakmp.composeapp.generated.resources.Res
 import priceninjakmp.composeapp.generated.resources.atb
 import priceninjakmp.composeapp.generated.resources.blyzenko
-import priceninjakmp.composeapp.generated.resources.card
-import priceninjakmp.composeapp.generated.resources.cards
 import priceninjakmp.composeapp.generated.resources.empty_card
 import priceninjakmp.composeapp.generated.resources.plus
-import priceninjakmp.composeapp.generated.resources.rukavychka
 import priceninjakmp.composeapp.generated.resources.silpo
 import priceninjakmp.composeapp.generated.resources.you_dont_have_saved_cards
 import pxToDp
@@ -55,29 +48,13 @@ import utils.GrayNavNar
 import utils.Shop
 import kotlin.jvm.Transient
 
-class CardsTab(
+class CardsScreen(
     @Transient private val onAddCardClick: () -> Unit,
     @Transient private val writeLong: (Pair<String, Long>) -> Unit,
     @Transient private val readLong: (String) -> Long?,
     @Transient private val readString: (String) -> String?,
     @Transient private val writeString: (Pair<String, String>) -> Unit,
-) : Tab {
-
-    @OptIn(ExperimentalResourceApi::class)
-    override val options: TabOptions
-        @Composable
-        get() {
-            val title = stringResource(Res.string.cards)
-            val icon = painterResource(Res.drawable.card)
-
-            return remember {
-                TabOptions(
-                    index = 0u,
-                    title = title,
-                    icon = icon
-                )
-            }
-        }
+) : Screen {
 
     @OptIn(ExperimentalResourceApi::class)
     @Composable
@@ -86,7 +63,7 @@ class CardsTab(
 //        val listOfShops = mutableListOf<String>().apply {
 //            Shop.entries.forEach { add(it.toString()) }
 //        }
-        val navigator = LocalNavigator.currentOrThrow.parent
+        val navigator = LocalNavigator.currentOrThrow
         val listOfShops = Shop.entries.map { it.toString() }
         val cardExistFromShop = listOfShops.filter {
             readLong(it) != null
@@ -124,19 +101,19 @@ class CardsTab(
 
                     if (readString(Shop.ATB.toString()) != null) {
                         AtbCard {
-                            navigator?.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.ATB.toString())))
+                            navigator.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.ATB.toString())))
                         }
                     }
 
                     if (readString(Shop.SILPO.toString()) != null) {
                         SilpoCard {
-                            navigator?.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.SILPO.toString())))
+                            navigator.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.SILPO.toString())))
                         }
                     }
 
                     if (readString(Shop.BLYZENKO.toString()) != null) {
                         BlyzenkoCard {
-                            navigator?.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.BLYZENKO.toString())))
+                            navigator.push(ScreenRegistry.get(SharedScreen.CardScreen(Shop.BLYZENKO.toString())))
                         }
                     }
 

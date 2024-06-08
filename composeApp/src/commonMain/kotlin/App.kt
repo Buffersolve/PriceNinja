@@ -4,10 +4,9 @@ import androidx.compose.ui.platform.LocalDensity
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.navigator.Navigator
 import cards.CardScreen
-import cards.CardsTab
+import cards.CardsHolderTab
 import di.startKoinApp
 import home.HomeTab
-import kotlinx.serialization.Transient
 import navigation.SharedScreen
 import onboard.OnBoardingScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
@@ -48,7 +47,7 @@ fun App(
         register<SharedScreen.HomeTab> { HomeTab }
         register<SharedScreen.ScannerTab> { ScannerTab(writeString, readLong) }
         register<SharedScreen.CardsTab> { provider ->
-            CardsTab(provider.onAddCardClick, writeLong, readLong, readString, writeString)
+            CardsHolderTab(provider.onAddCardClick, writeLong, readLong, readString, writeString)
         }
         register<SharedScreen.CardScreen> { provider ->
             CardScreen(readLong, readString, delete, provider.title)

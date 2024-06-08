@@ -28,4 +28,6 @@
     <string name="home">Home</string>
     <string name="cards">Cards</string>
 
+    <string name="filter">Filter</string>
+
 </resources>

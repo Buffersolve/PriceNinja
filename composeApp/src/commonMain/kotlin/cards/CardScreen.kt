@@ -70,7 +70,7 @@ data class CardScreen(
         var showDeleteDialog by remember { mutableStateOf(false) }
 
         Column(
-            modifier = Modifier.padding(top = pxToDp(WindowInsets.statusBars.getTop(LocalDensity.current)).dp)
+            modifier = Modifier.fillMaxSize().padding(top = pxToDp(WindowInsets.statusBars.getTop(LocalDensity.current)).dp)
         ) {
             Box(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
                 Icon(

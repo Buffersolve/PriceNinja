@@ -23,8 +23,13 @@ import ua.priceninja.data.parser.GetBlyzenkoData
 import utils.Shop
 
 fun main() {
-    embeddedServer(Netty, port = SERVER_PORT, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
+    embeddedServer(
+        Netty,
+        port = SERVER_PORT,
+//        host = "192.168.0.114",
+        host = "0.0.0.0",
+        module = Application::module
+    ).start(wait = true)
 }
 
 fun Application.module() {

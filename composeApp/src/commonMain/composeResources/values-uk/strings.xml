@@ -28,4 +28,6 @@
     <string name="home">Головна</string>
     <string name="cards">Картки</string>
 
+    <string name="filter">Фільтр</string>
+
 </resources>

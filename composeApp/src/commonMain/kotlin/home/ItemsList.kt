@@ -1,6 +1,8 @@
 package home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +20,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
@@ -25,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -44,7 +48,7 @@ import pxToDp
 import utils.Shop
 
 @Composable
-fun ItemsList(itemsList: List<Item>) {
+fun ItemsList(itemsList: List<Item>, onItemClick: (Item) -> Unit) {
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
@@ -52,7 +56,7 @@ fun ItemsList(itemsList: List<Item>) {
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         items(itemsList.size) {
-            Item(item = itemsList[it])
+            Item(item = itemsList[it], onItemClick = onItemClick)
         }
         items(3) {
             Spacer(
@@ -72,8 +76,13 @@ fun ItemsList(itemsList: List<Item>) {
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun Item(item: Item) {
-    Box {
+fun Item(item: Item, onItemClick: (Item) -> Unit) {
+    Box(
+        modifier = Modifier.clickable(
+            onClick = { onItemClick(item) },
+            indication = null,
+            interactionSource = remember { MutableInteractionSource() })
+    ) {
         Column(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -91,7 +100,9 @@ fun Item(item: Item) {
                     fontSize = 15.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Medium
-                )
+                ),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
             )
             if (item.oldPrice != null) {
                 Text(

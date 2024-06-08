@@ -30,14 +30,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.registry.ScreenProvider
 import cafe.adriel.voyager.core.registry.ScreenRegistry
-import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import cards.CardsTab
 import home.HomeTab
 import navigation.SharedScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi

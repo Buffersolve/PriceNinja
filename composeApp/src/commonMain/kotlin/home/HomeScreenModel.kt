@@ -98,7 +98,7 @@ class HomeScreenModel : ScreenModel {
     companion object {
         private val BASE_URL = if (getPlatform().name.contains("iOS")) "http://localhost:8080" else "http://10.0.2.2:8080"
 //        private val BASE_URL = "http://localhost:8080"
-//        private val BASE_URL = "http:/0.0.0.0:8080"
+//        private val BASE_URL = "http://192.168.0.119:8080"
         private val SHOPS_URL = "$BASE_URL/shops"
         private val ALL_DATA_URL = "$BASE_URL/data"
         private val SILPO_URL = "$BASE_URL/data/silpo"

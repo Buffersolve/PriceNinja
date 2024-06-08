@@ -1,17 +1,22 @@
 package scanner
 
+import ShopMapper
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
@@ -32,7 +37,11 @@ import org.jetbrains.compose.resources.painterResource
 import org.publicvalue.multiplatform.qrcode.CodeType
 import org.publicvalue.multiplatform.qrcode.ScannerWithPermissions
 import priceninjakmp.composeapp.generated.resources.Res
+import priceninjakmp.composeapp.generated.resources.atb_bage
+import priceninjakmp.composeapp.generated.resources.blyzenko_bage
+import priceninjakmp.composeapp.generated.resources.card
 import priceninjakmp.composeapp.generated.resources.scan
+import priceninjakmp.composeapp.generated.resources.silpo_bage
 import utils.Shop
 import kotlin.jvm.Transient
 
@@ -120,8 +129,13 @@ class ScannerTab(
         }
     }
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
-    fun ChooseShopDialog(scannedRes: String, writeString: (Pair<String, String>) -> Unit, onDismissRequest: () -> Unit) {
+    fun ChooseShopDialog(
+        scannedRes: String,
+        writeString: (Pair<String, String>) -> Unit,
+        onDismissRequest: () -> Unit
+    ) {
 //        val navigator = LocalNavigator.currentOrThrow
         val listOfShops = Shop.entries.map { it.toString() }
 
@@ -135,16 +149,32 @@ class ScannerTab(
             ) {
                 Column {
                     repeat(listOfShops.size) {
-                        TextButton(
-                            modifier = Modifier.align(Alignment.CenterHorizontally),
-                            onClick = {
-                                writeString(listOfShops[it] to scannedRes)
-                                onDismissRequest()
-                            }) {
-                            Text(
-                                text = listOfShops[it],
-                                color = Color.Black
+                        Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+
+                            TextButton(
+                                modifier = Modifier.align(Alignment.CenterVertically),
+                                onClick = {
+                                    writeString(listOfShops[it] to scannedRes)
+                                    onDismissRequest()
+                                }) {
+                                Text(
+                                    text = ShopMapper(listOfShops[it]),
+                                    color = Color.Black
+                                )
+                            }
+
+                            Image(
+                                painter = when (listOfShops[it]) {
+                                    Shop.SILPO.name -> painterResource(Res.drawable.silpo_bage)
+                                    Shop.ATB.name -> painterResource(Res.drawable.atb_bage)
+                                    Shop.BLYZENKO.name -> painterResource(Res.drawable.blyzenko_bage)
+                                    else -> painterResource(Res.drawable.card)
+                                },
+                                contentDescription = "Item Bage",
+                                modifier = Modifier.size(64.dp).align(Alignment.CenterVertically)
                             )
+
+
                         }
                     }
                 }

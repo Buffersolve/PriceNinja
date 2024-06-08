@@ -6,6 +6,7 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Element
 import org.koin.java.KoinJavaComponent.inject
 import utils.Links
 import utils.Shop
@@ -21,11 +22,10 @@ class GetBlyzenkoData {
 
         val productNames = doc.select(".sale").map { it.select("span")[1].text().orEmpty() }
 
-        val productImages = doc.select(".sale img, .sale source")
-            .mapNotNull { element ->
-                val srcset = element.attr("srcset").split(",").find { it.contains("300x300") }
-                srcset?.substringBefore(" ") ?: element.attr("src").takeIf { it.contains("300x300") }
-            }
+        val productImages: List<String> = doc.select(".sale img, .sale source").mapNotNull { element ->
+            val srcset = element.attr("srcset").split(",").firstOrNull()
+            srcset?.substringBefore(" ") ?: element.attr("src")
+        }
 
         val salePrices = doc.select(".sale .price span:nth-of-type(2)").mapNotNull {
             it.text().takeIf { value -> value.isNotBlank() }
