@@ -1,5 +1,6 @@
 package product
 
+import ShopMapper
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -29,7 +30,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
@@ -41,13 +41,11 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.delete_card
 import priceninjakmp.composeapp.generated.resources.location
 import priceninjakmp.composeapp.generated.resources.search_near_map
-import priceninjakmp.composeapp.generated.resources.trash
+import priceninjakmp.composeapp.generated.resources.silpo
 import pxToDp
 import utils.GrayNavNar
-import utils.Main
 
 class ProductScreen(
     private val imageUrl: String,
@@ -57,6 +55,7 @@ class ProductScreen(
     private val shop: String
 ) : Screen {
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
@@ -127,8 +126,9 @@ class ProductScreen(
                 ),
             )
 
+            val shopRes = ShopMapper(shop)
             MapButton {
-                navigator.push(MapScreen(shop))
+                navigator.push(MapScreen(shopRes))
             }
 
         }
