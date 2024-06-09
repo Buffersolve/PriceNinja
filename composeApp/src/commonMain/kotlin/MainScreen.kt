@@ -1,8 +1,10 @@
+import androidx.compose.foundation.ExperimentalFoundationApi
 import utils.Gray
 import utils.GrayNavNar
 import utils.Main
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,12 +17,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -30,18 +35,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import home.HomeTab
 import navigation.SharedScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.vectorResource
 import priceninjakmp.composeapp.generated.resources.Res
 import priceninjakmp.composeapp.generated.resources.scan
 import scanner.ScannerTab
+import utils.BASE_URL
 import kotlin.jvm.Transient
 
 class MainScreen(
@@ -52,17 +58,11 @@ class MainScreen(
 
     @Composable
     override fun Content() {
-//        val homeTab = rememberScreen(SharedScreen.HomeTab) as Tab
-//        val scannerTab = rememberScreen(SharedScreen.ScannerTab) as Tab
 
+        val homeTab = ScreenRegistry.get(SharedScreen.HomeTab) as Tab
+        var dialogState by remember { mutableStateOf(false) }
 
-        TabNavigator(tab = HomeTab) { tabNavigator ->
-            val density = LocalDensity.current
-
-//            val cardsTab = rememberScreen(SharedScreen.CardsTab {
-//                tabNavigator.current = scannerTab
-//            }) as Tab
-
+        TabNavigator(tab = homeTab) { tabNavigator ->
             Scaffold(content = {
                 CurrentTab()
             }, bottomBar = {
@@ -74,7 +74,7 @@ class MainScreen(
                             .wrapContentHeight()
                             .fillMaxWidth()
                             .padding(
-                                bottom = pxToDp(WindowInsets.navigationBars.getBottom(density)).dp,
+                                bottom = pxToDp(WindowInsets.navigationBars.getBottom(LocalDensity.current)).dp,
                                 start = 16.dp,
                                 end = 16.dp
                             )
@@ -84,9 +84,11 @@ class MainScreen(
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         TabNavigationItem(
-                            ScreenRegistry.get(SharedScreen.HomeTab) as Tab,
+                            homeTab,
                             tabNavigator
-                        )
+                        ) {
+                            dialogState = true
+                        }
                         ScannerNavItem(
                             ScreenRegistry.get(SharedScreen.ScannerTab) as Tab,
                             tabNavigator
@@ -99,10 +101,22 @@ class MainScreen(
 
             })
         }
+
+        if (dialogState) {
+            OpenIpDialog(writeString) {
+                dialogState = false
+            }
+        }
+
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
-    private fun TabNavigationItem(screenTab: Tab, tabNavigator: TabNavigator) {
+    private fun TabNavigationItem(
+        screenTab: Tab,
+        tabNavigator: TabNavigator,
+        onLongPress: () -> Unit = {}
+    ) {
         val selected = tabNavigator.current == screenTab
         val interactionSource = remember { MutableInteractionSource() }
 
@@ -113,14 +127,14 @@ class MainScreen(
         textColor = if (selected) Main.toArgb() else Gray.toArgb()
 
         Box(
-            modifier = Modifier
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = null,
-                    onClick = {
-                        tabNavigator.current = screenTab
-                    },
-                )
+            modifier = Modifier.combinedClickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = {
+                    tabNavigator.current = screenTab
+                },
+                onLongClick = { onLongPress() }
+            )
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -166,5 +180,33 @@ class MainScreen(
         }
     }
 
+    @Composable
+    fun OpenIpDialog(
+        writeString: (Pair<String, String>) -> Unit,
+        onDismiss: () -> Unit
+    ) {
+        var ipToSave by remember { mutableStateOf("") }
+        Dialog(onDismissRequest = onDismiss) {
+            Column(modifier = Modifier.padding(16.dp).background(Color.White)) {
+                TextField(
+                    value = ipToSave,
+                    onValueChange = { ipToSave = it },
+                    label = { Text("Enter IP") },
+                    modifier = Modifier.padding(16.dp)
+                )
+                Button(
+                    modifier = Modifier.fillMaxWidth()
+                        .padding(horizontal = 12.dp)
+                        .padding(bottom = 16.dp),
+                    onClick = {
+                        println(ipToSave)
+                        writeString(BASE_URL to ipToSave)
+                    }) {
+                    Text(text = "Save")
+                }
+
+            }
+        }
+    }
 
 }

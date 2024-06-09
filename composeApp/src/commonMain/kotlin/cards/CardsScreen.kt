@@ -129,7 +129,7 @@ class CardsScreen(
             }
 
             IconButton(
-                onClick = { onAddCardClick() },
+                onClick = onAddCardClick ,
                 modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 24.dp)
                     .background(color = GrayNavNar, shape = RoundedCornerShape(32.dp))
             ) {

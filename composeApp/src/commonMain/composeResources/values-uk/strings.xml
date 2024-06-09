@@ -30,4 +30,11 @@
 
     <string name="filter">Фільтр</string>
 
+    <string name="regular">Звичайний</string>
+    <string name="from_cheapest">Від найдешевшого</string>
+    <string name="from_expensive">Від найдорожчого</string>
+
+    <string name="search_near_map">Знайти найближчий магазин</string>
+
+
 </resources>

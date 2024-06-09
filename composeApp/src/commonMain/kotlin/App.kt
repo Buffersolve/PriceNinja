@@ -6,6 +6,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cards.CardScreen
 import cards.CardsHolderTab
 import di.startKoinApp
+import home.HomeScreen
 import home.HomeTab
 import navigation.SharedScreen
 import onboard.OnBoardingScreen
@@ -44,7 +45,7 @@ fun App(
     ScreenRegistry {
         register<SharedScreen.OnBoarding> { OnBoardingScreen(writeBoolean) }
         register<SharedScreen.MainScreen> { MainScreen(writeLong, writeString, readLong) }
-        register<SharedScreen.HomeTab> { HomeTab }
+        register<SharedScreen.HomeTab> { HomeTab(readString) }
         register<SharedScreen.ScannerTab> { ScannerTab(writeString, readLong) }
         register<SharedScreen.CardsTab> { provider ->
             CardsHolderTab(provider.onAddCardClick, writeLong, readLong, readString, writeString)

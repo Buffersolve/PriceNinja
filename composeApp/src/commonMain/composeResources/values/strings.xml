@@ -30,4 +30,10 @@
 
     <string name="filter">Filter</string>
 
+    <string name="regular">Regular</string>
+    <string name="from_cheapest">From the cheapest</string>
+    <string name="from_expensive">From the most expensive</string>
+
+    <string name="search_near_map">Find the nearest store</string>
+
 </resources>
