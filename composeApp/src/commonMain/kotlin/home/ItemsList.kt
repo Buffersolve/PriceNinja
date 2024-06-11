@@ -6,7 +6,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,10 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -25,7 +22,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,15 +31,11 @@ import coil3.compose.AsyncImage
 import domain.model.Item
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.atb
-import priceninjakmp.composeapp.generated.resources.atb_bage
-import priceninjakmp.composeapp.generated.resources.blyzenko_bage
-import priceninjakmp.composeapp.generated.resources.card
-import priceninjakmp.composeapp.generated.resources.scan
-import priceninjakmp.composeapp.generated.resources.silpo
-import priceninjakmp.composeapp.generated.resources.silpo_bage
-import priceninjakmp.composeapp.generated.resources.trash
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.atb_bage
+import priceninja.composeapp.generated.resources.blyzenko_bage
+import priceninja.composeapp.generated.resources.card
+import priceninja.composeapp.generated.resources.silpo_bage
 import pxToDp
 import utils.Shop
 

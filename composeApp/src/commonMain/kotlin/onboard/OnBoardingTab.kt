@@ -19,10 +19,10 @@ import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.onboarding_1
-import priceninjakmp.composeapp.generated.resources.onboarding_2
-import priceninjakmp.composeapp.generated.resources.onboarding_3
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.onboarding_1
+import priceninja.composeapp.generated.resources.onboarding_2
+import priceninja.composeapp.generated.resources.onboarding_3
 
 data class OnBoardingTab(
     private val image: Int,

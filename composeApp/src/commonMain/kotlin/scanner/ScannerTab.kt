@@ -36,12 +36,12 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.publicvalue.multiplatform.qrcode.CodeType
 import org.publicvalue.multiplatform.qrcode.ScannerWithPermissions
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.atb_bage
-import priceninjakmp.composeapp.generated.resources.blyzenko_bage
-import priceninjakmp.composeapp.generated.resources.card
-import priceninjakmp.composeapp.generated.resources.scan
-import priceninjakmp.composeapp.generated.resources.silpo_bage
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.atb_bage
+import priceninja.composeapp.generated.resources.blyzenko_bage
+import priceninja.composeapp.generated.resources.card
+import priceninja.composeapp.generated.resources.scan
+import priceninja.composeapp.generated.resources.silpo_bage
 import utils.Shop
 import kotlin.jvm.Transient
 

@@ -26,7 +26,7 @@ class MapScreen(
         WebView(
             state = state, modifier = Modifier.fillMaxSize().padding(
                 top = pxToDp(WindowInsets.statusBars.getTop(LocalDensity.current)).dp,
-                bottom = pxToDp(WindowInsets.navigationBars.getBottom(LocalDensity.current)).dp
+                bottom = pxToDp(WindowInsets.navigationBars.getBottom(LocalDensity.current)).dp + 100.dp
             )
         )
 

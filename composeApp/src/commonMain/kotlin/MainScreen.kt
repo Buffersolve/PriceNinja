@@ -44,8 +44,8 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import navigation.SharedScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.vectorResource
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.scan
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.scan
 import scanner.ScannerTab
 import utils.BASE_URL
 import kotlin.jvm.Transient

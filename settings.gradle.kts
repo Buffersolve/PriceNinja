@@ -1,4 +1,4 @@
-rootProject.name = "PriceNinjaKMP"
+rootProject.name = "PriceNinja"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

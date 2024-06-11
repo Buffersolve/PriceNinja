@@ -1,9 +1,5 @@
 package onboard
 
-import utils.GrayNavNar
-import utils.IS_SHOW_ON_BOARDING
-import utils.Main
-import MainScreen
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -48,18 +44,19 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import kotlinx.coroutines.launch
 import navigation.SharedScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.InternalResourceApi
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.next
-import priceninjakmp.composeapp.generated.resources.subtitle_on_board_1
-import priceninjakmp.composeapp.generated.resources.subtitle_on_board_2
-import priceninjakmp.composeapp.generated.resources.subtitle_on_board_3
-import priceninjakmp.composeapp.generated.resources.title_on_board_1
-import priceninjakmp.composeapp.generated.resources.title_on_board_2
-import priceninjakmp.composeapp.generated.resources.title_on_board_3
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.next
+import priceninja.composeapp.generated.resources.subtitle_on_board_1
+import priceninja.composeapp.generated.resources.subtitle_on_board_2
+import priceninja.composeapp.generated.resources.subtitle_on_board_3
+import priceninja.composeapp.generated.resources.title_on_board_1
+import priceninja.composeapp.generated.resources.title_on_board_2
+import priceninja.composeapp.generated.resources.title_on_board_3
 import pxToDp
+import utils.GrayNavNar
+import utils.IS_SHOW_ON_BOARDING
+import utils.Main
 
 class OnBoardingScreen(
     private val writeBoolean: (Pair<String, Boolean>) -> Unit,

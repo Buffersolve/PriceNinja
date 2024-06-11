@@ -41,22 +41,17 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import cafe.adriel.voyager.navigator.tab.Tab
-import cafe.adriel.voyager.navigator.tab.TabOptions
 import domain.model.Item
-import maps.MapScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.all
-import priceninjakmp.composeapp.generated.resources.filter
-import priceninjakmp.composeapp.generated.resources.from_cheapest
-import priceninjakmp.composeapp.generated.resources.from_expensive
-import priceninjakmp.composeapp.generated.resources.home
-import priceninjakmp.composeapp.generated.resources.loading
-import priceninjakmp.composeapp.generated.resources.regular
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.all
+import priceninja.composeapp.generated.resources.filter
+import priceninja.composeapp.generated.resources.from_cheapest
+import priceninja.composeapp.generated.resources.from_expensive
+import priceninja.composeapp.generated.resources.loading
+import priceninja.composeapp.generated.resources.regular
 import product.ProductScreen
 import pxToDp
 import utils.Gray
@@ -163,7 +158,13 @@ class HomeScreen(
 
                     ItemsList(items.value) {
 //                        navigator?.push(MapScreen(it.shop))
-                        navigator?.push(ProductScreen(it.image, it.name, it.oldPrice, it.discountPrice, it.shop))
+                        navigator.push(ProductScreen(
+                            it.image,
+                            it.name,
+                            it.oldPrice,
+                            it.discountPrice,
+                            it.shop
+                        ))
                     }
                 }
 

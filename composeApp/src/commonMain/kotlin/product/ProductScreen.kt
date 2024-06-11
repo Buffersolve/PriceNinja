@@ -40,10 +40,9 @@ import maps.MapScreen
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.location
-import priceninjakmp.composeapp.generated.resources.search_near_map
-import priceninjakmp.composeapp.generated.resources.silpo
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.location
+import priceninja.composeapp.generated.resources.search_near_map
 import pxToDp
 import utils.GrayNavNar
 

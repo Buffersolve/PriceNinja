@@ -9,8 +9,8 @@ import cafe.adriel.voyager.transitions.SlideTransition
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import priceninjakmp.composeapp.generated.resources.Res
-import priceninjakmp.composeapp.generated.resources.home
+import priceninja.composeapp.generated.resources.Res
+import priceninja.composeapp.generated.resources.home
 import kotlin.jvm.Transient
 
 class HomeTab(
