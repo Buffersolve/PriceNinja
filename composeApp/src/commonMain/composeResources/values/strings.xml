@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="title_on_board_1">3 supermarkets in 1 app</string>
+    <string name="subtitle_on_board_1">View discounts on your favorite products in one app</string>
+    <string name="title_on_board_2">Scan loyalty cards</string>
+    <string name="subtitle_on_board_2">Scan and add the cards in one addition</string>
+    <string name="title_on_board_3">Discount wallet</string>
+    <string name="subtitle_on_board_3">Store supermarket discount cards in one app</string>
+
+    <string name="all">All</string>
+
+    <string name="atb">ATB</string>
+    <string name="silpo">Silpo</string>
+    <string name="blyzenko">Blyzenko</string>
+
+    <string name="loading">Loading...</string>
+
+    <string name="next">Next</string>
+
+    <string name="delete_card">Delete card</string>
+    <string name="delete_card_screen">Delete card from screen</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="you_dont_have_saved_cards">You don't have any cards saved yet</string>
+
+    <string name="home">Home</string>
+    <string name="cards">Cards</string>
+
+    <string name="filter">Filter</string>
+
+    <string name="regular">Regular</string>
+    <string name="from_cheapest">From the cheapest</string>
+    <string name="from_expensive">From the most expensive</string>
+
+    <string name="search_near_map">Find the nearest store</string>
+
+</resources>

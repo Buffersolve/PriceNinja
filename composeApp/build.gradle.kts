@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    kotlin("plugin.serialization") version "1.9.22"
 }
 
 kotlin {
@@ -31,8 +32,17 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+
+//            implementation("io.insert-koin:koin-android:3.5.6")
+            implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.0-alpha06")
+//            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+            implementation("com.liftric:kvault:1.11.0")
+
         }
         commonMain.dependencies {
+            implementation("io.github.kevinnzou:compose-webview-multiplatform:1.9.10")
+
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
@@ -40,6 +50,35 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(projects.shared)
+
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.screenmodel)
+            implementation(libs.voyager.tab.navigator)
+            implementation(libs.voyager.transitions)
+
+            val ktorVersion = "2.3.10"
+            implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+
+            implementation("io.insert-koin:koin-compose:1.1.5")
+            implementation("io.insert-koin:koin-core:3.5.6")
+
+//            implementation("io.coil-kt.coil3:coil:3.0.0-alpha06")
+//            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+
+            implementation("io.coil-kt.coil3:coil-compose:3.0.0-alpha06")
+            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+
+            implementation("io.github.kalinjul.easyqrscan:scanner:0.1.3")
+
+
+        }
+        iosMain.dependencies {
+            implementation("com.liftric:kvault:1.11.0")
+
+            val ktorVersion = "2.3.10"
+
+//            implementation("io.coil-kt.coil3:coil-network-ktor:3.0.0-alpha06")
+            implementation("io.ktor:ktor-client-darwin:$ktorVersion")
         }
     }
 }
@@ -66,7 +105,11 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -76,5 +119,8 @@ android {
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
+}
+dependencies {
+    implementation(libs.androidx.ui.android)
 }
 

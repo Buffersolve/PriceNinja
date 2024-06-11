@@ -13,17 +13,23 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.koin.java.KoinJavaComponent.inject
-import ua.priceninja.data.db.ItemDAO
-import ua.priceninja.data.db.ItemsTable
+import db.ItemDAO
+import db.ItemsTable
 import ua.priceninja.data.network.GetSilpoData
 import ua.priceninja.data.parser.GetAtbData
-import ua.priceninja.di.startKoinApp
-import ua.priceninja.domain.model.Item
-import ua.priceninja.utils.Shop
+import di.startKoinApp
+import domain.model.Item
+import ua.priceninja.data.parser.GetBlyzenkoData
+import utils.Shop
 
 fun main() {
-    embeddedServer(Netty, port = SERVER_PORT, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
+    embeddedServer(
+        Netty,
+        port = SERVER_PORT,
+        host = "192.168.0.194",
+//        host = "0.0.0.0",
+        module = Application::module
+    ).start(wait = true)
 }
 
 fun Application.module() {
@@ -36,21 +42,22 @@ fun Application.module() {
     var allData = emptyList<Item>()
     var silpoData = emptyList<Item>()
     var atbData = emptyList<Item>()
+    var blyzenkoData = emptyList<Item>()
 
     transaction(db = database) {
         SchemaUtils.create(ItemsTable)
 
         // Silpo
-        runBlocking(Dispatchers.IO) {
-            GetSilpoData().fetchDataFromServer()
-        }
+        GetSilpoData().fetchDataFromServer()
         silpoData = itemDAO.getSilpoItems()
 
         // ATB
-        runBlocking(Dispatchers.IO) {
-            GetAtbData().fetchDataParser()
-        }
+        GetAtbData().fetchDataParser()
         atbData = itemDAO.getAtbItems()
+
+        // Blyzenko
+        GetBlyzenkoData().fetchDataParser()
+        blyzenkoData = itemDAO.getBlyzenkoItems()
 
         // ALL
         allData = itemDAO.getAllItems()
@@ -73,9 +80,9 @@ fun Application.module() {
         get("/data/atb") {
             call.respond(atbData)
         }
+        get("/data/blyzenko") {
+            call.respond(blyzenkoData)
+        }
     }
 
 }
-
-//@Serializable
-//data class Data(val shop: String)

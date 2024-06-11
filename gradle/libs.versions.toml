@@ -1,7 +1,7 @@
 [versions]
 agp = "8.2.0"
 android-compileSdk = "34"
-android-minSdk = "24"
+android-minSdk = "26"
 android-targetSdk = "34"
 androidx-activityCompose = "1.9.0"
 androidx-appcompat = "1.6.1"
@@ -16,6 +16,8 @@ junit = "4.13.2"
 kotlin = "1.9.23"
 ktor = "2.3.10"
 logback = "1.5.6"
+voyagerNavigator = "1.0.0"
+uiAndroid = "1.6.7"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -34,6 +36,13 @@ logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 ktor-server-core = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
 ktor-server-netty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
 ktor-server-tests = { module = "io.ktor:ktor-server-tests-jvm", version.ref = "ktor" }
+
+# Voyager Navigation
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyagerNavigator" }
+voyager-screenmodel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyagerNavigator" }
+voyager-tab-navigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyagerNavigator" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyagerNavigator" }
+androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
