@@ -26,8 +26,8 @@ fun main() {
     embeddedServer(
         Netty,
         port = SERVER_PORT,
-//        host = "192.168.0.114",
-        host = "0.0.0.0",
+        host = "192.168.0.194",
+//        host = "0.0.0.0",
         module = Application::module
     ).start(wait = true)
 }
@@ -48,21 +48,15 @@ fun Application.module() {
         SchemaUtils.create(ItemsTable)
 
         // Silpo
-        runBlocking(Dispatchers.IO) {
-            GetSilpoData().fetchDataFromServer()
-        }
+        GetSilpoData().fetchDataFromServer()
         silpoData = itemDAO.getSilpoItems()
 
         // ATB
-        runBlocking(Dispatchers.IO) {
-            GetAtbData().fetchDataParser()
-        }
+        GetAtbData().fetchDataParser()
         atbData = itemDAO.getAtbItems()
 
         // Blyzenko
-        runBlocking(Dispatchers.IO) {
-            GetBlyzenkoData().fetchDataParser()
-        }
+        GetBlyzenkoData().fetchDataParser()
         blyzenkoData = itemDAO.getBlyzenkoItems()
 
         // ALL
