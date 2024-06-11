@@ -9,8 +9,10 @@
 
 #### Preview
 
-<img width="300" src="" />
-
+<div align="center">
+    <img width="300" src="https://raw.githubusercontent.com/Buffersolve/PriceNinja/develop/composeApp/src/androidMain/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Logo 1" style="margin-right: 20px;">
+    <img width="300" src="https://scontent.flwo3-1.fna.fbcdn.net/v/t39.30808-6/295348055_469187578545303_2621973207460937108_n.png?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=0wipK874cAAQ7kNvgGcpF1M&_nc_ht=scontent.flwo3-1.fna&oh=00_AYAY9CTGwt2niX3_SMPVSKSX46Z-2rQhQcwf29YgV8xGDQ&oe=666E370A" alt="Logo 2" style="height: 200px;">
+</div>
 
 #### Project structure
 
@@ -31,7 +33,7 @@
   The most important subfolder is `commonMain`. If preferred, you can add code to the platform-specific folders here too.
 ```
 
-  ## License
+#### License
 ```
 MIT License
 
