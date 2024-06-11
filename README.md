@@ -3,15 +3,15 @@
 
 <div align="center">
     <img src="https://raw.githubusercontent.com/Buffersolve/PriceNinja/develop/composeApp/src/androidMain/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Logo 1" style="margin-right: 20px;">
-    <img src="https://scontent.flwo3-1.fna.fbcdn.net/v/t39.30808-6/295348055_469187578545303_2621973207460937108_n.png?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=0wipK874cAAQ7kNvgGcpF1M&_nc_ht=scontent.flwo3-1.fna&oh=00_AYAY9CTGwt2niX3_SMPVSKSX46Z-2rQhQcwf29YgV8xGDQ&oe=666E370A" alt="Logo 2" style="height: 200px;">
+    <img src="https://raw.githubusercontent.com/Buffersolve/PriceNinja/develop/composeApp/src/commonMain/composeResources/drawable/LogoUAD.png" alt="Logo 2" style="height: 180px;">
 </div>
 
 
 #### Preview
 
 <div align="center">
-    <img width="300" src="https://raw.githubusercontent.com/Buffersolve/PriceNinja/develop/composeApp/src/androidMain/res/mipmap-xxxhdpi/ic_launcher_round.webp" alt="Logo 1" style="margin-right: 20px;">
-    <img width="300" src="https://scontent.flwo3-1.fna.fbcdn.net/v/t39.30808-6/295348055_469187578545303_2621973207460937108_n.png?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=0wipK874cAAQ7kNvgGcpF1M&_nc_ht=scontent.flwo3-1.fna&oh=00_AYAY9CTGwt2niX3_SMPVSKSX46Z-2rQhQcwf29YgV8xGDQ&oe=666E370A" alt="Logo 2" style="height: 200px;">
+    <img width="300" src="https://raw.githubusercontent.com/Buffersolve/PriceNinja/develop/composeApp/src/androidMain/Screenshot_Android.png" alt="Logo 1" style="margin-right: 20px;">
+    <img width="375" src="https://raw.githubusercontent.com/Buffersolve/PriceNinja/develop/composeApp/src/iosMain/Screenshot_iOS.png" alt="Logo 2">
 </div>
 
 #### Project structure
