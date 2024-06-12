@@ -1,3 +1,4 @@
+https://github.com/Buffersolve/PriceNinja
 ### Price Ninja is a Kotlin Multiplatform project targeting Android, iOS and Server.
 #### This is a course project for the Ukrainian Academy of Printing
 
